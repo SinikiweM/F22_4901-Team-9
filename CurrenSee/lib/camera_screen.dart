@@ -1,6 +1,7 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'drawer.dart';
+//import 'package:flash/flash.dart';
 
 // A screen that allows users to see the cameraPreview
 class CameraScreen extends StatefulWidget {
@@ -8,15 +9,18 @@ class CameraScreen extends StatefulWidget {
     super.key,
     required this.camera,
   });
-
   final CameraDescription camera;
-
   @override
   CameraScreenState createState() => CameraScreenState();
 }
 
 class CameraScreenState extends State<CameraScreen> {
   late CameraController _controller;
+  late CameraImage latestImage;
+
+
+
+  String result = ""; //what txt2speech will read out.
   late Future<void> _initializeControllerFuture;
 
   @override
@@ -31,8 +35,31 @@ class CameraScreenState extends State<CameraScreen> {
       ResolutionPreset.max,
     );
     // Next, initialize the controller. This returns a Future.
-    _initializeControllerFuture = _controller.initialize();
+
+    _initializeControllerFuture = _controller.initialize().then((_) {
+      _controller.startImageStream((CameraImage image){
+        //This method captures random frames and saves the latest one
+        //it allows for images to be automatically captured and sent to model
+        //Images may have to be rescaled or modified
+        print(DateTime.now().millisecondsSinceEpoch);
+
+      });
+
+    });
+    _controller.setFlashMode(FlashMode.auto);
+
   }
+
+
+
+  String noteIdentity(CameraImage latestImage){
+    String result = "";
+
+    return result;
+  }
+
+
+
 
   @override
   void dispose() {
@@ -45,7 +72,7 @@ class CameraScreenState extends State<CameraScreen> {
   Widget build(BuildContext context) => Scaffold(
       appBar: AppBar(
         //title: const Text(),
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.black54,
       ),
 
       drawer: DrawerWidget(),
@@ -67,5 +94,5 @@ class CameraScreenState extends State<CameraScreen> {
       ),
       backgroundColor: Colors.black,
     );
-  Widget buildDrawer()=> DrawerWidget();
+  Widget buildDrawer()=> const DrawerWidget();
   }

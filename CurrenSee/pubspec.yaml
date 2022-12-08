@@ -16,6 +16,7 @@ dependencies:
   flutter:
     sdk: flutter
   camera: 0.10.0+3
+  flash: 2.0.5
   path_provider: 2.0.11
   path: 1.8.2
 

@@ -3,7 +3,9 @@ import 'dart:io';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import 'camera_screen.dart';
+
 
 Future<void> main() async {
   // Ensure that plugin services are initialized so that `availableCameras()`

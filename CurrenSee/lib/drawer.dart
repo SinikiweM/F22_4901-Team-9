@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 
 class DrawerWidget extends StatefulWidget {
   const DrawerWidget({super.key});
@@ -11,6 +12,16 @@ class _DrawerWidget extends State<DrawerWidget>{
   bool silent = false;
   bool conversion = false;
   String homecurr = 'USD';
+
+
+  FlutterTts flutterTts = FlutterTts(); // This initializes a text to speech instance.
+
+  Future _speak(String text) async {
+    await flutterTts.setLanguage("en-US");
+    await flutterTts.setPitch(1);
+    await flutterTts.setSpeechRate(1);
+    await flutterTts.speak(text);
+  }// so now whenever we call flutterTts.speak() it uses these settings.
 
   @override
   Widget build(BuildContext context) => Drawer(
@@ -25,6 +36,8 @@ class _DrawerWidget extends State<DrawerWidget>{
             onChanged: (String? val){
               setState(() {
                 homecurr = val!;
+                flutterTts.speak(homecurr); //this reads out what the new home currency is.
+                //will be used in demo to show that we have tts imported.
               });
             } ,
             items: const [

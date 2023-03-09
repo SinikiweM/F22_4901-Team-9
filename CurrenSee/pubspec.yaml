@@ -16,11 +16,8 @@ dependencies:
   flutter:
     sdk: flutter
   camera: 0.10.0+3
-<<<<<<< Updated upstream
-=======
   flutter_tts: ^3.6.3
   flash: 2.0.5
->>>>>>> Stashed changes
   path_provider: 2.0.11
   path: 1.8.2
 
